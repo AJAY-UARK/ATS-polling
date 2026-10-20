@@ -1,0 +1,39 @@
+{
+  "greenhouse_boards": [
+    "cloudflare",
+    "databricks",
+    "scaleai",
+    "affirm",
+    "togetherai"
+  ],
+  "lever_boards": [
+    "palantir",
+    "shieldai"
+  ],
+  "filter_rules": {
+    "include_titles": [
+      "mlops",
+      "machine learning",
+      "data engineer",
+      "software engineer",
+      "platform",
+      "embedded",
+      "infrastructure",
+      "applied ml",
+      "devops",
+      "analytics engineer"
+    ],
+    "exclude_titles": [
+      "staff",
+      "principal",
+      "director",
+      "manager",
+      "senior",
+      "sr.",
+      "lead",
+      "phd required",
+      "co-op",
+      "citizen"
+    ]
+  }
+}

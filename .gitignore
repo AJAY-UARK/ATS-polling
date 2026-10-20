@@ -1,0 +1,11 @@
+# python artifacts
+__pycache__/
+.venv/
+
+#local database & state
+data/*.db
+*.csv
+data/*.sqlite
+
+# IDE settings
+.vscode/
