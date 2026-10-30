@@ -1,27 +1,59 @@
 {
   "greenhouse_boards": [
-    "cloudflare",
-    "databricks",
+    "openai",
+    "anduril",
+    "appliedintuition",
+    "anthropic",
+    "perplexity",
+    "cohere",
     "scaleai",
+    "togetherai",
+    "databricks",
+    "cloudflare",
+    "github",
+    "gitlab",
+    "vercel",
+    "linear",
+    "stripe",
+    "plaid",
+    "coinbase",
+    "brex",
+    "ramp",
+    "shieldai",
+    "kodiak",
+    "nuro",
     "affirm",
-    "togetherai"
+    "airbnb",
+    "doordashusa",
+    "notion",
+    "figma"
   ],
   "lever_boards": [
     "palantir",
-    "shieldai"
+    "zoox",
+    "pony"
   ],
   "filter_rules": {
     "include_titles": [
       "mlops",
       "machine learning",
-      "data engineer",
-      "software engineer",
-      "platform",
-      "embedded",
-      "infrastructure",
+      "ai engineer",
+      "ai researcher",
       "applied ml",
+      "deep learning",
       "devops",
-      "analytics engineer"
+      "ci/cd",
+      "platform engineer",
+      "infrastructure",
+      "site reliability",
+      "sre",
+      "embedded",
+      "firmware",
+      "fpga",
+      "hardware software",
+      "systems engineer",
+      "computer engineer",
+      "robotics engineer"
     ],
     "exclude_titles": [
       "staff",
@@ -31,9 +63,16 @@
       "senior",
       "sr.",
       "lead",
+      "head of",
       "phd required",
       "co-op",
-      "citizen"
+      "us citizen",
+      "clearance required",
+      "frontend",
+      "fullstack",
+      "sales",
+      "marketing",
+      "recruiter"
     ]
   }
-}
+} 

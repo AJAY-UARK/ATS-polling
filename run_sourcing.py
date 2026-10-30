@@ -37,27 +37,26 @@ def main():
         failed_boards = []
 
         # Execute polling
-        greenhouse_targets = config.get("greenhouse_boards", [])
-        if greenhouse_targets:
-            logger.info(f"Polling {len(greenhouse_targets)} Greenhouse boards...")
-            for company in greenhouse_targets:
-                jobs = fetch_greenhouse_jobs(company=company, rules=rules, session=session)
-                total_discovered += len(jobs)
-                for job in jobs:
-                    if save_job(job=job):
-                        total_new += 1
-                        logger.info(f"[+] NEW MATCH: [{job.company}] {job.title}")
+        for company in config.get("greenhouse_boards", []):
+            jobs, ok = fetch_greenhouse_jobs(company=company, rules=rules, session=session)
+            if not ok:
+                failed_boards.append(f"Greenhouse:{company}")
+                continue
+            new_for_company = sum(1 for job in jobs if save_job(job=job))
+            total_discovered += len(jobs)
+            total_new += new_for_company
+            logger.info(f"[Greenhouse] {company:<18} | Matched: {len(jobs):<3} | New Saved: {new_for_company}")
+        
+        for company in config.get("lever_boards", []):
+            jobs, ok = fetch_lever_jobs(company=company, rules=rules, session=session)
+            if not ok:
+                failed_boards.append(f"Lever:{company}")
+                continue
 
-        lever_targets = config.get("lever_boards", [])
-        if lever_targets:
-            logger.info(f"Polling {len(lever_targets)} Lever boards...")
-            for company in lever_targets:
-                jobs = fetch_lever_jobs(company=company, rules=rules, session=session)
-                total_discovered += len(jobs)
-                for job in jobs:
-                    if save_job(job=job):
-                        total_new += 1
-                        logger.info(f"[+] NEW MATCH: [{job.company}] {job.title}")
+            new_for_company = sum(1 for job in jobs if save_job(job=job))
+            total_discovered += len(jobs)
+            total_new += new_for_company
+            logger.info(f"[Lever]      {company:<18} | Matched: {len(jobs):<3} | New Saved: {new_for_company}")
 
         # clean teardown
         session.close()
@@ -67,6 +66,10 @@ def main():
         logger.info(f"Total Target Roles Discovered: {total_discovered}")
         logger.info(f"New Requisitions Saved:        {total_new}")
         logger.info(f"Duplicates Filtered Out:       {total_discovered - total_new}")
+        if failed_boards:
+            logger.warning(f"Failed Boards ({len(failed_boards)}): {', '.join(failed_boards)}")
+        else:
+            logger.info("All configured ATS boards responded with HTTP 200 OK.")
 
     except Exception as e:
         logger.critical(f"Pipeline suffered a fatal crash: {e}", exc_info=True)
